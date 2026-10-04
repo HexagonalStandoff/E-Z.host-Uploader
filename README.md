@@ -78,6 +78,7 @@ The app ignores the clipboard change caused by its own copy, so it never re-uplo
 2. Put `ezuploader.py` and `build.bat` in the same folder.
 3. Double-click `build.bat`.
 4. Your executable will be at `dist\EZUploader.exe`.
+note: `build.bat` will not function if you have pathlib installed. Uninstall with pip uninstall pathlib, you can install it again after building.
 
 Or run the build manually:
 
@@ -171,7 +172,7 @@ Screenshots are uploaded from memory, and nothing is written to disk. To fully r
 
 ## Contributing
 
-Issues and pull requests are welcome. Ideas:
+Pull requests are welcome. Ideas:
 
 - Support for video/GIF uploads
 - Custom filename options
@@ -183,10 +184,7 @@ Issues and pull requests are welcome. Ideas:
 
 ## Contributors
 
-- Claude (Anthropic): initial implementation and documentation
+- HexagonalStandoff: Testing, UI, security verification
+- Claude (Anthropic): initial framework and functional documentation
 
 ---
-
-## License
-
-Add your license of choice here (e.g. MIT).
