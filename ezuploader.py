@@ -1,12 +1,3 @@
-"""
-EZ Screenshot Uploader
-----------------------
-Watches the Windows clipboard. When you take a screenshot (Win+Shift+S or
-PrintScreen), it uploads the image to e-z.host and copies the resulting URL to
-your clipboard, ready to paste.
-
-Build: see build.bat
-"""
 import sys
 import os
 import io
@@ -129,7 +120,6 @@ def set_startup(enabled):
                 pass
 
 
-
 # Tray icon
 def make_icon(size=64, paused=False):
     icon_image = Image.new("RGBA", (size, size), (0, 0, 0, 0))
@@ -177,7 +167,7 @@ class App:
         if self.cfg["start_in_tray"] and self.api_key:
             self.root.withdraw()
 
-    #UI 
+    # UI
     def build_ui(self):
         style = ttk.Style(self.root)
         try:
@@ -378,6 +368,7 @@ class App:
         if not self.stop_event.is_set():
             self.root.after(200, self.pump_events)
 
+    # Clipboard watcher
     # Windows exposes a clipboard sequence number that changes whenever the clipboard content changes.
     def clip_seq(self):
         return user32.GetClipboardSequenceNumber() if user32 else 0
@@ -478,12 +469,14 @@ class App:
     def run(self):
         self.root.mainloop()
 
+
 # Single-instance guard
 def ensure_single_instance():
     if os.name != "nt":
         return True
     ctypes.windll.kernel32.CreateMutexW(None, False, f"Local\\{APP_ID}Mutex")
     return ctypes.windll.kernel32.GetLastError() != 183  # ERROR_ALREADY_EXISTS
+
 
 if __name__ == "__main__":
     if not ensure_single_instance():
