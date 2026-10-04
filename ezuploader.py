@@ -1,3 +1,12 @@
+"""
+EZ Screenshot Uploader
+----------------------
+Watches the Windows clipboard. When you take a screenshot (Win+Shift+S or
+PrintScreen), it uploads the image to e-z.host and copies the resulting URL to
+your clipboard, ready to paste.
+
+Build: see build.bat
+"""
 import sys
 import os
 import io
@@ -44,7 +53,6 @@ DEFAULTS = {
 }
 
 user32 = ctypes.windll.user32 if os.name == "nt" else None
-
 
 # Config + API key storage
 class Config:
@@ -139,10 +147,7 @@ def make_icon(size=64, paused=False):
     ], fill=(255, 255, 255, 255))
     return icon_image
 
-
-# --------------------------------------------------------------------------
 # Main app
-# --------------------------------------------------------------------------
 class App:
     def __init__(self):
         self.cfg = Config()
@@ -172,7 +177,7 @@ class App:
         if self.cfg["start_in_tray"] and self.api_key:
             self.root.withdraw()
 
-    # ---------------- UI ----------------
+    #UI 
     def build_ui(self):
         style = ttk.Style(self.root)
         try:
@@ -184,7 +189,7 @@ class App:
         main_frame = ttk.Frame(self.root, padding=6)
         main_frame.grid()
 
-        # --- API key section ---
+        # API key section
         api_key_frame = ttk.LabelFrame(main_frame, text="Upload key", padding=10)
         api_key_frame.grid(row=0, column=0, sticky="ew", **frame_padding)
         self.key_var = tk.StringVar(value=self.api_key)
@@ -210,7 +215,7 @@ class App:
         ).grid(row=2, column=0, columnspan=2, sticky="w", pady=(6, 0))
         api_key_frame.columnconfigure(0, weight=1)
 
-        # --- Options section ---
+        # Options section
         options_frame = ttk.LabelFrame(main_frame, text="Options", padding=10)
         options_frame.grid(row=1, column=0, sticky="ew", **frame_padding)
         self.option_vars = {}
@@ -232,7 +237,7 @@ class App:
                 pady=1,
             )
 
-        # --- Status + history ---
+        # Status + history
         status_frame = ttk.LabelFrame(main_frame, text="Status", padding=10)
         status_frame.grid(row=2, column=0, sticky="ew", **frame_padding)
         self.status_lbl = ttk.Label(status_frame, text="", wraplength=380, justify="left")
@@ -415,7 +420,7 @@ class App:
             return
         self.upload_image(screenshot)
 
-    # ---------------- Upload ----------------
+    # Upload
     def upload_image(self, image):
         if not self.api_key:
             self.events.put(("status", False, "No upload key set. Open the app and add it."))
