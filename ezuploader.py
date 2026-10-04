@@ -1,12 +1,3 @@
-"""
-EZ Screenshot Uploader
-----------------------
-Watches the Windows clipboard. When you take a screenshot (Win+Shift+S or
-PrintScreen), it uploads the image to e-z.host and copies the resulting URL to
-your clipboard, ready to paste.
-
-Build: see build.bat
-"""
 import sys
 import os
 import io
@@ -55,9 +46,7 @@ DEFAULTS = {
 user32 = ctypes.windll.user32 if os.name == "nt" else None
 
 
-# --------------------------------------------------------------------------
 # Config + API key storage
-# --------------------------------------------------------------------------
 class Config:
     def __init__(self):
         self.data = dict(DEFAULTS)
