@@ -9,7 +9,7 @@ No more clunky capture configs. Just use the screenshot shortcuts you already kn
 
 A moment later, the link is on your clipboard, ready to paste.
 
-> **Note:** This is an unofficial community tool and is not affiliated with e-z.host. You need your own e-z.host upload key.
+> **Note:** This is an unofficial community tool and is not YET affiliated with e-z.host. You need your own e-z.host upload key.
 
 ---
 
